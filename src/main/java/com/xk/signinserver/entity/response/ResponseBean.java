@@ -3,10 +3,15 @@ package com.xk.signinserver.entity.response;
 import java.util.Date;
 
 public class ResponseBean {
-    private ResponseCode code;
+    private int code;
     private String message;
     private Object data;
 
+
+    public ResponseBean(ResponseCode responseCode) {
+        code = responseCode.getCode();
+        message = responseCode.getMsg();
+    }
 
     public ResponseBean() {
     }
@@ -20,12 +25,12 @@ public class ResponseBean {
         return this;
     }
 
-    public ResponseCode getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public ResponseBean setCode(ResponseCode code) {
-        this.code = code;
+    public ResponseBean setCode(ResponseCode responseCode) {
+        code = responseCode.getCode();
         return this;
     }
 
@@ -38,11 +43,4 @@ public class ResponseBean {
         return this;
     }
 
-    @Override
-    public String toString() {
-        return "ResponseBean{" +
-                "code='" + code + '\'' +
-                ", message='" + message + '\'' +
-                '}';
-    }
 }

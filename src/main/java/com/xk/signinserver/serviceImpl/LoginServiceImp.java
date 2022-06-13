@@ -15,33 +15,31 @@ public class LoginServiceImp implements LoginService {
     @Autowired
     private UserMapper userMapper;
 
-
     @Override
-    public ResponseBean login(String username, String passWord) {
+    public ResponseBean login(String account, String passWord) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select().eq("account",username).eq("password",passWord);
+        queryWrapper.select().eq("account",account).eq("password",passWord);
         User user = userMapper.selectOne(queryWrapper);
         ResponseBean responseBean = new ResponseBean();
         if (user!=null){
             responseBean.setCode(ResponseCode.SUCCESS).setData(user);
-            return responseBean;
         } else{
             responseBean.setCode(ResponseCode.FAILED).setMessage("account or password error");
-            return responseBean;
         }
+        System.out.println(user);
+        return responseBean;
     }
 
     @Override
     public ResponseBean register(User user) {
         int result = userMapper.insert(user);
+        System.out.println(result);
         ResponseBean responseBean = new ResponseBean();
-        responseBean.setCode(ResponseCode.SUCCESS).setMessage("insert success");
-
-//        if (result==1){
-//
-//        }else{
-//
-//        }
+        if (result>0){
+            responseBean.setCode(ResponseCode.SUCCESS).setMessage("register success");
+        }else {
+            responseBean.setCode(ResponseCode.FAILED).setMessage("register failed");
+        }
         return responseBean;
     }
 }

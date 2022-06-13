@@ -1,7 +1,7 @@
 package com.xk.signinserver.entity.response;
 
 public enum ResponseCode {
-    SUCCESS(200,"success"),
+    SUCCESS(200,""),
     FAILED(400,"");
 
     ResponseCode(int code,String msg) {
